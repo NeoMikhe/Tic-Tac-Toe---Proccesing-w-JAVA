@@ -1,6 +1,6 @@
 int[][] board;
-int winner, shifts = 0, num_Start = (int)(Math.random()*2), chckWin;
-int player = 1, x, y, cont;
+int winner = 0, shifts = 0, num_Start = (int)(Math.random()*2), chckWin;
+int player = 1, x, y, cont, cont2 = 0;
 int IA = -1, aux = 0, aux2 = 0, board_Choose = (int)(Math.random()*4), num1, num2;
 PFont f;
 String msg;
@@ -68,7 +68,7 @@ void check(){
     if(board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] == -1)
       winner = 2;
     if(board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] == -1)
-      winner = 2;  
+      winner = 2;
   }
 }
     
@@ -264,87 +264,31 @@ void playIA(){
 
 // Si empieza segundo la IA
 void blockPlayIA(){
-    num1 = (int)(Math.random()*3);
-    num2 = (int)(Math.random()*3);
-    switch(aux){
-      case 1:
-        if(checkWinIA())
-          System.out.println("WIN IA");
-        else if(checkBlockIA())
-          System.out.println("BLOCK IA");
-        else if(board[num1][num2] == 0)
-          board[num1][num2] = -1;
-        else {
-          while(board[num1][num2] != 0 && board[num1][num2] == 1)
-            num1 = (int)(Math.random()*3);
-            num2 = (int)(Math.random()*3);
-            if(board[num1][num2] == 0 && board[num1][num2] != 1)
-              board[num1][num2] = -1;
+  num1 = (int)(Math.random()*3);
+  num2 = (int)(Math.random()*3);
+  if(aux == 1){
+    if(checkWinIA())
+      System.out.println("WIN IA");
+    else if(checkBlockIA())
+      System.out.println("BLOCK IA");
+    else if(board[num1][num2] == 0)
+      board[num1][num2] = -1;
+    else if(board[num1][num2] != 0){
+      aux2 = 1;
+      while(aux2 == 1){
+        if(aux == 1){
+          num1 = (int)(Math.random()*3);
+          num2 = (int)(Math.random()*3);
+          if(board[num1][num2] == 0){
+            board[num1][num2] = -1;
+            aux2 = 0;
+          }
         }
-        break;
-      case 2:
-        if(checkWinIA())
-          System.out.println("WIN IA");
-        else if(checkBlockIA())
-          System.out.println("BLOCK IA");
-        else if(board[num1][num2] == 0)
-          board[num1][num2] = -1;
-        else {
-          while(board[num1][num2] != 0 && board[num1][num2] == 1)
-            num1 = (int)(Math.random()*3);
-            num2 = (int)(Math.random()*3);
-            if(board[num1][num2] == 0 && board[num1][num2] != 1)
-              board[num1][num2] = -1;
-        }
-        break;
-      case 3:
-        if(checkWinIA())
-          System.out.println("WIN IA");
-        else if(checkBlockIA())
-          System.out.println("BLOCK IA");
-        else if(board[num1][num2] == 0)
-          board[num1][num2] = -1;
-        else {
-          while(board[num1][num2] != 0 && board[num1][num2] == 1)
-            num1 = (int)(Math.random()*3);
-            num2 = (int)(Math.random()*3);
-            if(board[num1][num2] == 0 && board[num1][num2] != 1)
-              board[num1][num2] = -1;
-        }
-        break;
-      case 4:
-        if(checkWinIA())
-          System.out.println("WIN IA");
-        else if(checkBlockIA())
-          System.out.println("BLOCK IA");
-        else if(board[num1][num2] == 0)
-          board[num1][num2] = -1;
-        else {
-          while(board[num1][num2] != 0 && board[num1][num2] == 1)
-            num1 = (int)(Math.random()*3);
-            num2 = (int)(Math.random()*3);
-            if(board[num1][num2] == 0 && board[num1][num2] != 1)
-              board[num1][num2] = -1;
-        }
-        break;
-      case 5:
-        if(checkWinIA())
-          System.out.println("WIN IA");
-        else if(checkBlockIA())
-          System.out.println("BLOCK IA");
-        else if(board[num1][num2] == 0)
-          board[num1][num2] = -1;
-        else {
-          while(board[num1][num2] != 0 && board[num1][num2] == 1)
-            num1 = (int)(Math.random()*3);
-            num2 = (int)(Math.random()*3);
-            if(board[num1][num2] == 0 && board[num1][num2] != 1)
-              board[num1][num2] = -1;
-        }
-        break;
+      }
     }
-    
-   if(aux == 0){
+  }
+  
+  if(aux == 0){
     if(board[1][1] == 0){
         board[1][1] = -1;
         aux = 1;
@@ -352,21 +296,18 @@ void blockPlayIA(){
         switch(board_Choose){
           case 0:
             board[0][0] = -1;
-            aux = 2;
             break;
           case 1:
             board[0][2] = -1;
-            aux = 3;
             break;
           case 2:
             board[2][0] = -1;
-            aux = 4;
             break;
           case 3:
             board[2][2] = -1;
-            aux = 5;
             break;
         }
+        aux = 1;
   }
 }
 
@@ -382,6 +323,7 @@ void validate(){
       if(cont <= 3)
         blockPlayIA();
       cont++;
+      cont2+=2;
     }
   }
   // Empieza la IA
@@ -398,6 +340,7 @@ void validate(){
       if(board[y][x] == 0){
         board[y][x] = player;
         shifts = 0;
+        cont2+=2;
       }
     }
   }
@@ -411,11 +354,10 @@ void declare(){
     msg = "WIN";
     text(msg, 300, 300);
   }
-  if(winner == 2){
+  if(winner == 2 || (cont2 >= 9 && winner == 0)){
     textFont(f, 80);
     fill(255,0,0);
     textAlign(CENTER);
-    //msg = str(winner);
     msg = "DRAW";
     text(msg, 300, 300);
    }
