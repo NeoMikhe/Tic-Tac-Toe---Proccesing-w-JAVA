@@ -1,5 +1,5 @@
 int[][] board;
-int winner, shifts = 0, num_Start = 0/*(int)(Math.random()*2)*/, chckWin;
+int winner, shifts = 0, num_Start = (int)(Math.random()*2), chckWin;
 int player = 1, x, y, cont;
 int IA = -1, aux = 0, aux2 = 0, board_Choose = (int)(Math.random()*4), num1, num2;
 PFont f;
