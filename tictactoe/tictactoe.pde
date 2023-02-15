@@ -132,7 +132,7 @@ public boolean checkWinIA(){
 }
 
 public boolean checkBlockIA(){
-  // Victorias horizontales
+  // Bloqueos horizontales
   for(int i = 0; i < 3; i++){
     if(board[i][0] == 1 && board[i][1] == 1 && board[i][2] == 0){
       board[i][2] = -1;
@@ -147,7 +147,7 @@ public boolean checkBlockIA(){
       return true;
     }
   }
-  // Victorias verticales
+  // Bloqueos verticales
   for(int i = 0; i < 3; i++){
     if(board[0][i] == 1 && board[1][i] == 1 && board[2][i] == 0){
       board[2][i] = -1;
@@ -162,7 +162,7 @@ public boolean checkBlockIA(){
       return true;
     }
   }
-  // Victorias cruzadas
+  // Bloqueos cruzadas
   if(board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 0){
     board[2][2] = -1;
     return true;
