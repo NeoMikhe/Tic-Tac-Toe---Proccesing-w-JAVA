@@ -351,14 +351,21 @@ void declare(){
     textFont(f, 80);
     fill(255,215,0);
     textAlign(CENTER);
-    msg = "WIN";
+    msg = "GANASTE";
     text(msg, 300, 300);
   }
-  if(winner == 2 || (cont2 >= 9 && winner == 0)){
+  if(winner == 2){
     textFont(f, 80);
     fill(255,0,0);
     textAlign(CENTER);
-    msg = "DRAW";
+    msg = "PERDISTE";
+    text(msg, 300, 300);
+   }
+   if(winner == 0 && cont2+num_Start >= 9){
+    textFont(f, 80);
+    fill(0,0,0);
+    textAlign(CENTER);
+    msg = "EMPATE";
     text(msg, 300, 300);
    }
 }
